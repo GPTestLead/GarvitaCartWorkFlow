@@ -1,0 +1,78 @@
+package automation.menuOptions;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+
+public class MenuOptionsStepDef {
+	static WebDriver driver;
+	@Before
+	public void setup() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Student\\Desktop\\chromedriver.exe");
+		driver = new ChromeDriver();
+	}
+	@Given("^open AutomationPractice$")
+	public void Step_One() 
+	{
+		driver.get("http://automationpractice.com/index.php");
+		
+	}
+	@And("^Find options named WOMEN and click on evening dress$")
+	public void Step_Two() throws InterruptedException 
+	{
+		Thread.sleep(1000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//*[@id=\"block_top_menu\"]/ul/li[1]/a")));
+		Thread.sleep(2000);
+		WebElement quick1 =driver.findElement(By.xpath("//*[@id=\"block_top_menu\"]/ul/li[2]/a"));
+		quick1.click();
+		WebElement quick =driver.findElement(By.xpath("//*[@id=\"categories_block_left\"]/div/ul/li[2]/a"));
+		quick.click();
+	}
+
+	@And("^Find Printed Dress and add to cart$")
+public void Step_Three() throws InterruptedException 
+{
+	Thread.sleep(1000);
+	JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li/div/div[1]/div/a[1]/img")));
+	Thread.sleep(2000);
+	WebElement quick =driver.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li/div/div[2]/div[2]/a[1]/span"));
+	quick.click();
+}
+	@And("^Click on Continue shopping$")
+public void Step_Four() throws InterruptedException 
+{
+	Thread.sleep(2000);
+	WebElement quick =driver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/span/span"));
+	quick.click();
+}
+	@And("^Click on cart and check items$")
+public void Step_Five() throws InterruptedException 
+{
+	Thread.sleep(1000);
+	
+	WebElement quick =driver.findElement(By.xpath("//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a"));
+	quick.click();
+	
+	
+	//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//	driver.manage().window().maximize();
+	
+}
+	@And("^Click on checkout and redirecting to cart page$")
+public void Step_Six() throws InterruptedException 
+{
+	Thread.sleep(2000);
+	WebElement quick =driver.findElement(By.xpath("//*[@id=\"button_order_cart\"]/span"));
+	quick.click();
+	Thread.sleep(2000);
+	driver.manage().window().maximize();
+}
+}
